@@ -16,12 +16,12 @@ Developing Applications for iOS, winter of 2017.
 4
 00:00:15,482 --> 00:00:19,318
 This is Lecture number 7, and today we're going to talk
-今天是第七节课，我们会先讲一点
+今天是第七节课，我们会先再讲一点
 
 5
 00:00:19,386 --> 00:00:23,688
 a little bit more about Swift. And once we do that,
-更多关于Swift的东西。接着呢，
+关于Swift的东西。接着呢，
 
 6
 00:00:23,757 --> 00:00:27,159
@@ -61,366 +61,454 @@ can generate an error, or what we call throwing an error. And
 13
 00:00:51,818 --> 00:00:55,020
 we can always tell these methods though really clearly
+我们可以总是很清楚的知道这些方法
 
 14
 00:00:55,089 --> 00:00:58,323
 in any API. Because when they're declared,
+和它们的API。是因为当它们在声明的时候，  
 
 15
 00:00:58,392 --> 00:01:01,059
 they'll have the word throws after it. And
+就会有关键字throw跟在后面。
 
 16
 00:01:01,128 --> 00:01:04,329
 throws means that somewhere in the processing of this method,
+而throws就一位置在这个方法体的某处
 
 17
 00:01:04,398 --> 00:01:07,866
 it's possible, but not guaranteed, that it will throw
+有可能，但不一定有保证，会抛出
 
 18
 00:01:07,934 --> 00:01:11,803
 an error. So when it throws that error at us,
+一个错误。因此当错误被抛向我们时，
 
 19
 00:01:11,871 --> 00:01:16,040
 we have to catch the error. And the way we catch it is,
+我们就必须要捕获这个错误。而我们捕获异常的方法呢
 
 20
 00:01:16,109 --> 00:01:18,677
 well, first of all, every time we call a method
+首先来说，每当我们调用一个
 
 21
 00:01:18,745 --> 00:01:21,813
 that can throw an error, we have to use the word try. So
+可以抛异常的方法时，就需要使用关键字try
 
 22
 00:01:21,882 --> 00:01:24,949
 we have to try that method because it might fail.
+我们必须要去试验那个可能会失败的方法
 
 23
 00:01:25,018 --> 00:01:27,152
 So that's why we use the word try. But
+这就是为啥我们要使用关键字try了。
 
 24
 00:01:27,220 --> 00:01:29,020
 if we wanna catch the error that comes back,
+但如果我们想要捕获到返回的异常
 
 25
 00:01:29,089 --> 00:01:32,390
 we actually have to do that little try inside what's
+事实上就要把try(试验)放在
 
 26
 00:01:32,459 --> 00:01:37,729
 called a do construct. So we have to say do{, and
+叫做do的结构中。所以我们就说do{ 
 
 27
 00:01:37,798 --> 00:01:42,800
 then some code that has some tries in it. And then} catch,
+一些包含或多或少的try的代码，完了再} catch
 
 28
 00:01:42,869 --> 00:01:47,338
 then let error is going to allow us to grab the thrown
+接着 let error 会允许我们将被抛出的
 
 29
 00:01:47,407 --> 00:01:50,242
 error into a variable, in this case called error.
+异常保存在一个变量中，在这里就是error
 
 30
 00:01:50,310 --> 00:01:53,311
 We could say, let any variable name we want.
+比方说，let 任意变量名
 
 31
 00:01:53,380 --> 00:01:55,880
 That's gonna be the variable that has the error in it.
+那这就是要保存异常的变量
 
 32
 00:01:55,949 --> 00:01:59,017
 And then in that curly brace, we handle the error. And
+接着在那对花括号中去处理异常。
 
 33
 00:01:59,085 --> 00:02:01,853
 then after we've handled it, our code continues. So
+在我们处理完异常之后，会继续执行我们的代码。整个逻辑就是
 
 34
 00:02:01,922 --> 00:02:04,957
 we caught the error, we deal with it, we keep going.
+捕获异常，处理掉，然后继续做我们要做的事情。
 
 35
 00:02:05,025 --> 00:02:08,760
 It did, if we want to, and if our function throws,
+如果我们想的话，并且函数已经抛出异常了，
 
 36
 00:02:08,829 --> 00:02:12,531
 we could re-throw the error by using the keyword throw there,
+我们可以用关键字throw再抛一遍(re-throw)这个异常
 
 37
 00:02:12,599 --> 00:02:17,636
 in our second, little curly brace space. Now this error
+在我们的第二个花括号里。
 
 38
 00:02:17,704 --> 00:02:21,439
 that gets thrown to you, it does have to be of a certain
+那个被抛向你的异常也有一个确定的类型。
 
 39
 00:02:21,508 --> 00:02:25,744
 type. The type is called error. It's a protocol,
-
+这个类型叫做error，是一个协议
 40
 00:02:25,813 --> 00:02:28,981
 which I'm gonna talk about later in this lecture, but
+稍后我们会在这节课上讲到协议
 
 41
 00:02:29,049 --> 00:02:31,082
 it's a pretty simple little type.
+就是一个很简单的类型
 
 42
 00:02:31,151 --> 00:02:34,720
 And in UIKit, when UIKit methods throw an error,
+在UIkit中，当UIKit的方法抛出一个异常时，
 
 43
 00:02:34,788 --> 00:02:37,889
 they throw an error of this type NSError. So
+这个异常的类型会是NSError。
 
 44
 00:02:37,958 --> 00:02:42,226
 you can go take a look in the documentation for NSError and
+你可以去文档中查看NSError的定义。
 
 45
 00:02:42,295 --> 00:02:46,498
 see what an NSError is. It has an error code, it has an error
+它有一个error code，他有一个error
 
 46
 00:02:46,567 --> 00:02:50,335
 domain, like where the error occurred. And it,
+domain, 表示error发生的地点。
 
 47
 00:02:50,404 --> 00:02:54,038
 even has some things like a description of what happened,
+他甚至会有一些像是发生了啥啊
 
 48
 00:02:54,107 --> 00:02:57,342
 why it failed, things like that.
+失败的原因啊，之类的描述
 
 49
 00:02:57,411 --> 00:03:00,812
 Now, sometimes we call a function that throws,
+接下来，有时我们调用一个会抛异常的方法，
 
 50
 00:03:00,881 --> 00:03:05,383
 and we know for sure it's not going to fail. This is
+并且我们知道这个方法一定不会失败。虽然
 
 51
 00:03:05,452 --> 00:03:10,155
 rare that we know this, but if we're certain about it,
+大部分时候我们并不知道╮(╯_╰)╭，但是万一我们确定一定以及肯定的时候
 
 52
 00:03:10,224 --> 00:03:14,926
 we can use another version of try, which is try! And just
+就可以使用另外一个版本的try, 就是try! 就像
 
 53
 00:03:14,994 --> 00:03:18,630
 like exclamation point means to force it in an optional,
+感叹号表示强制解包一样
 
 54
 00:03:18,699 --> 00:03:22,267
 exclamation point here means to force it essentially.
+感叹号在这里本质上也是强制的意思
 
 55
 00:03:22,336 --> 00:03:25,303
 And if we call context.save() right here,
+假如我们的这里调用了context.save()
 
 56
 00:03:25,372 --> 00:03:28,974
 whatever that function is, if we call it and it throws,
+不管到底是什么函数，只要我们调用了并且抛异常了，
 
 57
 00:03:29,043 --> 00:03:32,043
 our app will crash, okay. That's what the try!
+我们的应用就会崩溃。这就是try!的
 
 58
 00:03:32,111 --> 00:03:35,913
 means. It means try, I know this is not going to throw.
+作用。它的意思就是，try吧，我知道这里不会抛异常
 
 59
 00:03:35,982 --> 00:03:39,217
 If it does, crash my app. There's yet
+要是抛了，那就让我的应用闪退吧。
 
 60
 00:03:39,286 --> 00:03:44,189
 another try though, which is try?. Try?
+然而这里还有另外一种try，是try? Try?
 
 61
 00:03:44,258 --> 00:03:48,994
 means try to call this method that throws, and
+是指试着去调用可能会抛错的方法
 
 62
 00:03:49,063 --> 00:03:51,763
 if it does throw, just give me back nil.
+如果抛异常了，就返回nil给我。
 
 63
 00:03:52,832 --> 00:03:53,665
 Well, for
+当然了
 
 64
 00:03:53,734 --> 00:03:56,534
 that to work of course, the variable that we're
+为了能够正常工作，这里的变量
 
 65
 00:03:56,603 --> 00:04:00,838
 assigning the result of this method, I called this one,
+我们为这个变量提供结果的方法，我这里叫做
 
 66
 00:04:00,907 --> 00:04:04,509
 errorProneFunctionThatReturns- AnInt. Whatever that returns,
+errorProneFunctionThatReturnsAnInt. 不管这个方法返回什么
 
 67
 00:04:04,577 --> 00:04:07,145
 it's now gonna return an optional version of that.
+我们的变量都会返回一个可选类型的版本。
 
 68
 00:04:07,213 --> 00:04:09,247
 So error prone function that returns an int,
+方法errorProneFunctionThatReturnsAnInt()
 
 69
 00:04:09,316 --> 00:04:11,483
 returns an int obviously. But x,
+很明显会返回一个int值。但是x
 
 70
 00:04:11,552 --> 00:04:15,720
 this let x =, that x is gonna be an optional int for
+这个 let x =, 那个x会是一个可选类型的int
 
 71
 00:04:15,789 --> 00:04:18,589
 obvious reasons because if error prone function return
+因为如果方法errorProneFunctionThatReturnsAnInt()抛异常了
 
 72
 00:04:18,658 --> 00:04:23,428
 an int throws, it has to throw nil back at us, okay? So
+就必须抛nil给我们，明白吗？
 
 73
 00:04:23,496 --> 00:04:28,200
 that's what try? is. Try? is give it a try, if it fails,
+这就是try?。Try?就是说先试试，不行
 
 74
 00:04:28,268 --> 00:04:31,169
 just give me back nil. If I do this try, I don't get to
+再返我个nil。如果我用这种try, 就看不到
 
 75
 00:04:31,238 --> 00:04:33,271
 look at the error. I don't know what it is.
+错误，不知道发生了啥。
 
 76
 00:04:33,340 --> 00:04:37,642
 I'm ignoring the error here. I know there was an error, but
+在这里我要忽略这个错误。在tyr?中，我知道这里发生了异常
 
 77
 00:04:37,711 --> 00:04:42,213
 that's all I know in the try? case. So it's a very simple
+但也就仅此而已。所以这是一个非常简单
 
 78
 00:04:42,282 --> 00:04:45,049
 error mechanism that works quite well.
+还挺好用的错误处理机制。
 
 79
 00:04:45,118 --> 00:04:48,786
 In Swift they really learned the lessons of some other
+在Swift中，他们真是吸取了其它语言中的教训
 
 80
 00:04:48,855 --> 00:04:52,891
 languages that have more overwrought, over complicated
+什么过分考究，过于复杂啊
 
 81
 00:04:52,959 --> 00:04:56,728
 throwing of errors that are throwing up call stacks and
+抛异常要抛调用栈啊
 
 82
 00:04:56,796 --> 00:05:00,398
 all these things, Swift is very straight forward,
+所有的这些（都没有），Swift就是非常直接了当。
 
 83
 00:05:00,467 --> 00:05:04,335
 sees the entirety of the error processing, all right?
+以上就是关于错误处理的全部内容，好吗？
 
 84
 00:05:04,404 --> 00:05:07,572
 Now, another completely different topic, extensions.
+那么，另一个完全不同的主体，扩展
 
 85
 00:05:07,641 --> 00:05:12,109
 So, an extension allows you to add a method or a var,
+扩展使你可以添加一个方法或一个变量到
 
 86
 00:05:12,178 --> 00:05:16,180
 even, to another class or structure enum, that you may
+另一个类或者结构体、枚举上，即使你连
 
 87
 00:05:16,249 --> 00:05:19,750
 not even have the code to, okay, it's called extension
+他们的代码都没有。这就是扩展。
 
 88
 00:05:19,819 --> 00:05:23,822
 because it extends that class. So, here's a concrete example,
+因为它扩展了一个类。这里有个实际的例子
 
 89
 00:05:23,891 --> 00:05:26,524
 I hope you understand why we might use an extension.
+我希望你们能够明白我们为什么要使用扩展
 
 90
 00:05:26,593 --> 00:05:29,360
 Remember when we did our app last time and
+还记的我们上次做的那个应用
 
 91
 00:05:29,429 --> 00:05:33,064
 we went to our Storyboard and we wrapped the detail of
-
+我们走到Storyboard, 把split view的细节
 92
 00:05:33,133 --> 00:05:36,267
 the split view in a navigation controller and
+封装在了navigation controller中
 
 93
 00:05:36,336 --> 00:05:39,037
 it broke our code. Right, it broke our code and
+这样就破坏我们的代码了。他打断了我们的代码还
 
 94
 00:05:39,106 --> 00:05:41,572
 prepare for segue because that code was looking for
+准备segue, 因为那段代码是要
 
 95
 00:05:41,641 --> 00:05:44,509
 a Face View controller and it found a navigation controller
+找一个FaceViewController，但却找到了一个NavigationController
 
 96
 00:05:44,578 --> 00:05:47,745
 instead. And the way we fix that is we just look to see if
+我们修复这个问题的方法是先看看它
 
 97
 00:05:47,814 --> 00:05:50,348
 it was navigation controller first. And if it was, we look
-
+是否是一个NavigationController，如果是，我们再看这个
 98
 00:05:50,417 --> 00:05:53,150
 at the visible view controller of the navigation controller,
+NavigationController的可见ViewController
 
 99
 00:05:53,219 --> 00:05:56,654
 now we have our Face View controller back again. Now,
+接着就可以得到我们想要的FaceViewController了。
 
 100
 00:05:56,723 --> 00:06:01,092
 we could put that code into an extension of UIViewController
+现在我们可以把这段代码放到UIViewController的扩展中
 
 101
 00:06:01,161 --> 00:06:04,228
 by creating a new var, you can see it right here
+通过创建一个新的变量，他在这里
 
 102
 00:06:04,297 --> 00:06:06,832
 called contentViewController, we can call the new var
+叫做contentViewController，我们可以随意为这个变量
 
 103
 00:06:06,900 --> 00:06:09,701
 anything we want, I like contentViewController cuz
+命名
 
 104
 00:06:09,769 --> 00:06:12,136
